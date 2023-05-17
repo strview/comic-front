@@ -13,13 +13,13 @@ import {
         Route,
         Link
         } from "react-router-dom"
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles'
 
-import PageOne from '../pages/auth/page-one';
-import PageTwo from '../pages/auth/page-two';
+import PageOne from '../pages/auth/page-one'
+import PageTwo from '../pages/auth/page-two'
 
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -38,7 +38,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       marginLeft: 0,
     }),
   }),
-);
+)
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -55,7 +55,7 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-}));
+}))
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -64,22 +64,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
-}));
+}))
 
 
 
-const LayoutAuth = ({mode, setMode, user}) => {
-  const theme = useTheme();
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [accountMenuAnchorEl, setAccountMenuAnchorEl] = React.useState(null);
+const LayoutAuth = ({mode, setMode, user, setUser}) => {
+  const theme = useTheme()
+  const [drawerOpen, setDrawerOpen] = useState(true)
+  const [accountMenuAnchorEl, setAccountMenuAnchorEl] = React.useState(null)
   const [selectedIndex, setSelectedIndex] = React.useState(0)
-  const accountMenuOpen = Boolean(accountMenuAnchorEl);
+  const accountMenuOpen = Boolean(accountMenuAnchorEl)
   const handleAccountMenuClick = (event) => {
-    setAccountMenuAnchorEl(event.currentTarget);
-  };
+    setAccountMenuAnchorEl(event.currentTarget)
+  }
   const handleAccountMenuClose = () => {
-    setAccountMenuAnchorEl(null);
-  };
+    setAccountMenuAnchorEl(null)
+  }
 
   const storeUserSetPreference = (pref) => {
     localStorage.setItem("mode", pref)
@@ -106,18 +106,23 @@ useEffect(() => {
 }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDrawerOpen = () => {
-    setDrawerOpen(true);
-  };
+    setDrawerOpen(true)
+  }
 
   const handleDrawerClose = () => {
-    setDrawerOpen(false);
-  };
+    setDrawerOpen(false)
+  }
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index)
-    // if(mobileOpen) setMobileOpen(!mobileOpen);
+    // if(mobileOpen) setMobileOpen(!mobileOpen)
     
-  };
+  }
+
+  const logout = () => {
+    setUser(null)
+    localStorage.removeItem("user")
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -202,7 +207,7 @@ useEffect(() => {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleAccountMenuClose}>
+        <MenuItem onClick={logout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
@@ -280,7 +285,7 @@ useEffect(() => {
       </Main>
     </Router>
     </Box>
-  );
+  )
 }
 
 export default LayoutAuth

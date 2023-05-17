@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './App.css'
-import {  Button } from '@mui/material';
+
 
 import LayoutAuth from './components/layout-auth'
 import LayoutPublic from './components/layout-public'
@@ -10,24 +10,26 @@ import DarkMode from './components/dark-mode'
 function App() {
   const [mode, setMode] = React.useState('dark')
   // const [user, setUser] = React.useState(null)
-  const [user, setUser] = React.useState({username : 'testuser', email : 'test@test.com', role : 'admin'})
+  const tempUser = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null
+  console.log(tempUser)
+  const [user, setUser] = React.useState(tempUser)
 
 
-  if(user === null) {
+  if(user === null || user.loggedIn === false) {
     return (
       <>
-        <LayoutPublic/>
+        <LayoutPublic user={user} setUser={setUser}/>
       </>
     )
   }
 
   return (
     <DarkMode mode={mode} setMode={setMode}>
-      <LayoutAuth mode={mode} setMode={setMode} user={user} />
+      <LayoutAuth mode={mode} setMode={setMode} user={user} setUser={setUser} />
     </DarkMode>
   )
 
 
 }
 
-export default App;
+export default App

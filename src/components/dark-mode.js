@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { amber, deepOrange, grey } from '@mui/material/colors';
-import { Box } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { amber, deepOrange, grey } from '@mui/material/colors'
+import { Box } from '@mui/material'
 
 const getDesignTokens = (mode) => ({
     palette: {
