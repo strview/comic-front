@@ -41,6 +41,40 @@ const getDesignTokens = (mode) => ({
             }),
       },
     },
+    components: {
+        MuiAvatar: {
+            styleOverrides: {
+                root: {
+                    ...(mode === 'light'
+                    ? {
+                    color: amber[300],
+                    backgroundColor: grey[900],
+                    }
+                    : {
+                    color: deepOrange[500],
+                    backgroundColor: '#fff',
+                    }),
+                },
+            },
+        },
+        MuiListItemButton: {
+            styleOverrides: {
+                root: {
+                    '&.Mui-selected': {
+                        ...(mode === 'light'
+                        ? {
+                            color: grey[900] ,
+                            backgroundColor:amber[700] ,
+                        }
+                        : {
+                            color: '#fff',
+                            backgroundColor: deepOrange[700] ,
+                        }),
+                    },   
+                },
+            },
+        },
+    },
   })
 
 const darkModeTheme = createTheme(getDesignTokens('dark'))
